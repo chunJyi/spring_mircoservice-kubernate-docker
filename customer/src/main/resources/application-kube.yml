@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: customer
+
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+  rabbitmq:
+    addresses: rabbitmq:5672
+    username: user
+    password: password
+    virtual-host: /
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/customer
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc.time_zone: Asia/Yangon
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+    enabled: false
+
+#  instance:
+#    prefer-ip-address: true
+#    ip-address: 192.168.100.31   # replace with your host machine IP
+#    #    hostname: fraud-server       # optional, can be ignored
+#    instance-id: ${spring.application.name}:${server.port}
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0   # trace every request (dev)

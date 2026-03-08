@@ -1,0 +1,45 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: fraud
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/fraud
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc.time_zone: Asia/Yangon
+
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0   # trace every request (dev)
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+    enabled: false
+
+  instance:
+    prefer-ip-address: true
+    ip-address: 192.168.100.31   # replace with your host machine IP
+    #    hostname: fraud-server       # optional, can be ignored
+    instance-id: ${spring.application.name}:${server.port}
