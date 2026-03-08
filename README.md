@@ -1,64 +1,244 @@
-Spring Boot Microservices with Docker & Kubernetes
+# 🚀 Spring Microservices with Docker & Kubernetes
 
-A Spring Boot Microservices architecture deployed using Docker and
-Kubernetes. This project demonstrates how to build, containerize, and
-orchestrate multiple microservices with modern cloud-native tools.
+![Spring Boot](https://img.shields.io/badge/SpringBoot-3.x-brightgreen)
+![Docker](https://img.shields.io/badge/Docker-Container-blue)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-326CE5)
+![Java](https://img.shields.io/badge/Java-21-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-Technologies Used - Java 21 - Spring Boot - Docker - Kubernetes -
-PostgreSQL - RabbitMQ - Maven - Jib Maven Plugin
+A **Spring Boot Microservices architecture** deployed using **Docker containers** and orchestrated with **Kubernetes**.
 
-Architecture This project follows a Microservices Architecture where
-each service runs independently and communicates with others.
+This project demonstrates how to containerize microservices and deploy them to a Kubernetes cluster.
 
-Client | v Customer Service | | REST Call v Fraud Service | | Message
-Queue v RabbitMQ | v Notification Service
+---
 
-Microservices
+# 📚 Table of Contents
 
-Customer Service - Handles customer registration - Stores customer
-data - Calls Fraud Service to check fraud status
+- 📖 Project Overview  
+- 🏗 Architecture  
+- ⚙️ Tech Stack  
+- 📂 Project Structure  
+- 🚀 Getting Started  
+- 🐳 Docker Setup  
+- ☸️ Kubernetes Deployment  
+- 🧪 API Testing  
+- 🤝 Contributing  
+- 📄 License  
 
-Fraud Service - Performs fraud detection - Returns fraud check result
+---
 
-Notification Service - Sends notification messages - Consumes messages
-from RabbitMQ
+# 📖 Project Overview
 
-Docker Each microservice is packaged as a Docker container.
+This project demonstrates how to build and deploy a **Spring Boot Microservices system** using modern DevOps tools.
 
-Build Docker image: mvn compile jib:dockerBuild
+Features include:
 
-Kubernetes Deployment
+- Microservice architecture
+- Containerized services using Docker
+- Kubernetes orchestration
+- Service-to-service communication
+- Scalable deployment
+- Cloud-native architecture
 
-Apply Kubernetes configuration: kubectl apply -f k8s/
+---
 
-Check pods: kubectl get pods
+# 🏗 Architecture
 
-Check services: kubectl get svc
+```mermaid
+flowchart LR
+    Client --> API-Gateway
+    API-Gateway --> Customer-Service
+    API-Gateway --> Fraud-Service
+    API-Gateway --> Notification-Service
 
-PostgreSQL Database used for storing service data.
+    Customer-Service --> PostgreSQL
+    Fraud-Service --> PostgreSQL
+    Notification-Service --> RabbitMQ
+```
 
-Example configuration: username: postgres password: root port: 5432
+---
 
-RabbitMQ Used for asynchronous communication between microservices.
+# ⚙️ Tech Stack
 
-Example flow: Customer Service -> RabbitMQ Queue -> Notification Service
+### Backend
+- Java 21
+- Spring Boot
+- Spring Web
+- Spring Data JPA
 
-Running Locally
+### Messaging
+- RabbitMQ
 
-1.  Start Minikube minikube start
+### Database
+- PostgreSQL
 
-2.  Build Docker Images mvn clean compile jib:dockerBuild
+### DevOps
+- Docker
+- Kubernetes
+- Maven
 
-3.  Deploy to Kubernetes kubectl apply -f k8s/
+---
 
-4.  Check Pods kubectl get pods
+# 📂 Project Structure
 
-5.  Check Services kubectl get svc
+```
+spring_mircoservice-kubernate-docker
+│
+├── customer-service
+│   └── Spring Boot microservice
+│
+├── fraud-service
+│   └── Fraud validation microservice
+│
+├── notification-service
+│   └── RabbitMQ consumer service
+│
+├── docker
+│   └── Docker configuration
+│
+├── kubernetes
+│   └── Kubernetes deployment files
+│
+└── README.md
+```
 
-Project Structure
+---
 
-spring_mircoservice-kubernate-docke | |– customer |– fraud |–
-notification |– k8s | |– postgres | |– rabbitmq | |– services | |–
-docker-compose.yml |– README.md
+# 🚀 Getting Started
 
-Author Developed by Chun
+### 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/chunJyi/spring_mircoservice-kubernate-docker.git
+cd spring_mircoservice-kubernate-docker
+```
+
+---
+
+# 🐳 Build Docker Images
+
+Build the project first:
+
+```bash
+mvn clean package
+```
+
+Then build Docker images:
+
+```bash
+docker build -t customer-service .
+docker build -t fraud-service .
+docker build -t notification-service .
+```
+
+---
+
+# 🐳 Run with Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+Check running containers:
+
+```bash
+docker ps
+```
+
+---
+
+# ☸ Kubernetes Deployment
+
+Start Minikube:
+
+```bash
+minikube start
+```
+
+Apply Kubernetes configurations:
+
+```bash
+kubectl apply -f k8s/
+```
+
+Check running pods:
+
+```bash
+kubectl get pods
+```
+
+Check services:
+
+```bash
+kubectl get services
+```
+
+---
+
+# 🧪 Test API
+
+Example endpoint:
+
+```
+POST /api/v1/customers
+```
+
+Example request body:
+
+```json
+{
+  "name": "John",
+  "email": "john@example.com"
+}
+```
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+Steps:
+
+1. Fork the repository
+
+2. Create a new branch
+
+```bash
+git checkout -b feature/new-feature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push to GitHub
+
+```bash
+git push origin feature/new-feature
+```
+
+5. Open a Pull Request
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+# 👨‍💻 Author
+
+**Chun**
+
+Software Engineer
+
+GitHub:  
+https://github.com/chunJyi
+
+---
+
+⭐ If you like this project, please give it a star.
